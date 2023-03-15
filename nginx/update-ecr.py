@@ -21,7 +21,7 @@ def build(client, tag):
     return response
 
 def push(client, tag):
-    response = [line for line in client.push(registry)
+    response = [line for line in client.push(registry)]
     return response
 
 if __name__ == "__main__":
