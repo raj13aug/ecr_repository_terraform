@@ -1,9 +1,9 @@
 #!/bin/sh
-IMAGE = Hello
-AWS_REGION = us-east-1
-AWS_ACCOUNT_ID = 932999788441
-AWS_SERVER = $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
-TAG_LATEST = $AWS_SERVER/$IMAGE:latest
+IMAGE = "Hello"
+AWS_REGION = "us-east-1"
+AWS_ACCOUNT_ID = "932999788441"
+AWS_SERVER = "$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com"
+TAG_LATEST = "$AWS_SERVER/$IMAGE:latest"
 #build:
 docker image build --cache-from $TAG_LATEST -t $TAG_LATEST .
 #login:
