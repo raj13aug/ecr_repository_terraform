@@ -5,7 +5,6 @@ import docker
 
 @click.command()
 @click.option("--registry", help="Name of the ECR registry", required=True)
-
 session  = boto3.session.Session()
 resp = session.client('ecr').get_authorization_token()
 token = resp['authorizationData'][0]['authorizationToken']
