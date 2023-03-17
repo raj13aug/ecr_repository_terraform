@@ -90,7 +90,7 @@ resource "aws_ecr_repository_policy" "demo-repo-policy" {
 resource "null_resource" "update_docker_fund" {
   provisioner "local-exec" {
     working_dir = "nginx"
-    command     = "sudo ./update-ecr.py --registry ${aws_ecr_repository.ecr_repo.repository_url}"
+    command     = "chmod +x update-ecr.py && ./update-ecr.py --registry ${aws_ecr_repository.ecr_repo.repository_url}"
   }
 
   depends_on = [aws_ecr_repository.ecr_repo, aws_ecr_lifecycle_policy.ecr_policy, aws_ecr_repository_policy.demo-repo-policy]
