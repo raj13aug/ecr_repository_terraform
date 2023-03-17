@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 IMAGE = Hello
 AWS_REGION = us-east-1
 AWS_ACCOUNT_ID = 932999788441
