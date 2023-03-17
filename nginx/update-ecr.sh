@@ -1,11 +1,17 @@
-#!/bin/sh
-AWS_REGION = "us-east-1"
-AWS_ACCOUNT_ID = 932999788441
-ECR_LOGIN=$(aws ecr get-login-password --region $AWS_REGION)
-# Docker login to repository.
-docker login --username AWS --password $ECR_LOGIN $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
-IMAGE="hello"
-# Create tag (which bundles image name and account ID).
-TAG_LATEST=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$IMAGE:latest
-echo $TAG_LATEST
-docker push $TAG_LATEST
+#!/bin/bash
+REPO_NAME="docker_ecr_repo"
+ECR_ACCOUNT="932999788441.dkr.ecr.eu-east-1.amazonaws.com"
+ECR_REPO="${ECR_ACCOUNT}/{REPO_NAME}"
+
+aws ecr get-login --region eu-west-2  | sed -e 's/^.*-p \(.*\)\s\-\e.*$/\1/' |  docker login --password-stdin -u AWS ${ECR_ACCOUNT}
+
+
+# Get the image id of the Docker build. If there is a "latest" use that else get the first without latest
+
+TAG=`docker images | grep -w "${REPO_NAME}" | grep latest | awk '{ print $3; }'`
+if [[ -z ${TAG} ]]; then
+        TAG=`docker images | grep -w "${REPO_NAME}" | awk '{ print $3; }'`
+fi
+ 
+docker tag "$TAG" "${ECR_REPO}"
+docker push "${ECR_REPO}"
