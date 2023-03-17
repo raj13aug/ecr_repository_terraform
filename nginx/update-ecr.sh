@@ -1,13 +1,11 @@
 #!/bin/sh
-IMAGE = "Hello"
 AWS_REGION = "us-east-1"
-AWS_ACCOUNT_ID = "932999788441"
-AWS_SERVER = "$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com"
-TAG_LATEST = "$AWS_SERVER/$IMAGE:latest"
-#build:
-docker image build --cache-from $TAG_LATEST -t $TAG_LATEST .
-#login:
-aws ecr get-login-password | docker login --username AWS --password-stdin $(AWS_SERVER)
-
-#push: build loging
-docker push $(TAG_LATEST)
+AWS_ACCOUNT_ID = 932999788441
+ECR_LOGIN=$(aws ecr get-login-password --region $AWS_REGION)
+# Docker login to repository.
+docker login --username AWS --password $ECR_LOGIN $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
+IMAGE="hello"
+# Create tag (which bundles image name and account ID).
+TAG_LATEST=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$IMAGE:latest
+echo $TAG_LATEST
+docker push $TAG_LATEST
