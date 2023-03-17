@@ -5,9 +5,10 @@ variable "docker_image_tag" {
 }
 
 variable "immutable_ecr_repositories" {
-  type = bool
+  type    = bool
+  default = true
 }
 
 variable "region" {
-  default = "eu-west-2"
+  default = "us-east-1"
 }
