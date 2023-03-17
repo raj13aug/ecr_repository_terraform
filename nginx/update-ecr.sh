@@ -8,7 +8,7 @@ TAG_LATEST = $(AWS_SERVER)/$(IMAGE):latest
 #build:
 docker build --cache-from $(TAG_LATEST) -t $(TAG_LATEST) .
 #login:
-aws ecr get-login-password --region $(AWS_REGION)  | \
+aws ecr get-login-password | \
 docker login --username AWS --password-stdin $(AWS_SERVER)
 #push: build loging
 docker push $(TAG_LATEST)
