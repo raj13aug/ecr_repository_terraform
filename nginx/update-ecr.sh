@@ -1,3 +1,4 @@
+#!/bin/bash
 IMAGE = Hello
 #AWS_PROFILE = registry
 AWS_REGION = us-east-1
