@@ -11,4 +11,4 @@ docker build -t "${TAG}" .
 docker tag "${TAG}:latest" 932999788441.dkr.ecr.us-east-1.amazonaws.com/docker_ecr_repo:latest
 # Get the image id of the Docker build. If there is a "latest" use that else get the first without latest
 #docker tag "${TAG}" "${ECR_REPO}"
-docker push "${ECR_REPO}"
+docker push "${ECR_REPO}:latest"
