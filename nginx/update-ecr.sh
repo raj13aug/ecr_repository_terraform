@@ -1,6 +1,6 @@
 #!/bin/bash
 REPO_NAME="docker_ecr_repo"
-ECR_ACCOUNT="932999788441.dkr.ecr.us-east-1.amazonaws.com"
+ECR_ACCOUNT="932xx1.dkr.ecr.us-east-1.amazonaws.com"
 ECR_REPO="${ECR_ACCOUNT}/${REPO_NAME}"
 TAG="docker_ecr_repo"
 #Login to the Docker registry on ECR.
